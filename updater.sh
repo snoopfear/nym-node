@@ -20,7 +20,7 @@ systemctl stop nym-node
 
 # Копируем новый бинарник в /usr/local/bin
 echo "Копируем новый бинарник nym-node в /usr/local/bin..."
-cp -i /tmp/nym-node /usr/local/bin/
+cp -f /tmp/nym-node /usr/local/bin/
 
 # Удаляем временный файл
 echo "Удаляем временный файл..."
