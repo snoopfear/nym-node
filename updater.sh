@@ -6,9 +6,28 @@ if [ "$(id -u)" -ne "0" ]; then
   exit 1
 fi
 
+# Получаем последнюю версию через API GitHub
+echo "Получаем информацию о последнем релизе nym-node..."
+LATEST_VERSION=$(curl -s https://api.github.com/repos/nymtech/nym/releases/latest | grep -oP '"tag_name": "\K(.*?)(?=")')
+
+# Проверяем, что версия получена
+if [ -z "$LATEST_VERSION" ]; then
+  echo "Ошибка: не удалось получить последнюю версию nym-node."
+  exit 1
+fi
+
+# Формируем URL для скачивания
+DOWNLOAD_URL="https://github.com/nymtech/nym/releases/download/$LATEST_VERSION/nym-node"
+
 # Скачиваем последнюю версию nym-node
-echo "Скачиваем последний релиз nym-node..."
-wget -q https://github.com/nymtech/nym/releases/download/nym-binaries-v2025.3-ruta/nym-node -O /tmp/nym-node
+echo "Скачиваем последнюю версию nym-node ($LATEST_VERSION)..."
+wget -q "$DOWNLOAD_URL" -O /tmp/nym-node
+
+# Проверяем успешность скачивания
+if [ ! -f /tmp/nym-node ]; then
+  echo "Ошибка: не удалось скачать nym-node."
+  exit 1
+fi
 
 # Даем файлу права на исполнение
 echo "Даем права на исполнение скачанному файлу..."
