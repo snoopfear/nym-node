@@ -89,4 +89,6 @@ systemctl enable nym-node
 # Финальное сообщение
 echo -e "\n✅ Установка завершена!"
 echo "⚠️  Замените конфигурационные файлы с вашими данными, включая IP, если необходимо."
-echo "▶️  Для запуска ноды выполните: \033[1msystemctl start nym-node\033[0m"
+echo "Проверь настройки в /etc/systemd/journald.conf: Storage=persistent sudo systemctl restart systemd-journald"
+echo "▶️  Для запуска ноды выполните: systemctl start nym-node"
+echo "логи journalctl -u nym-node -f"
