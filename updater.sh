@@ -17,7 +17,7 @@ if [ -z "$LATEST_VERSION" ]; then
 fi
 
 # Формируем URL для скачивания
-DOWNLOAD_URL="https://github.com/nymtech/nym/releases/download/nym-binaries-v2025.14-feta/nym-node"
+DOWNLOAD_URL="https://github.com/nymtech/nym/releases/download/$LATEST_VERSION/nym-node"
 
 # Скачиваем последнюю версию nym-node
 echo "Скачиваем последнюю версию nym-node ($LATEST_VERSION)..."
